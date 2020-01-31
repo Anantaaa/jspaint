@@ -720,13 +720,13 @@ function canvas_pointer_move(e){
 	
 	if(info!=prevInfo){
 		toolno++;
-		console.log(info);
-		console.log(prevInfo);
-		info = info.concat(' ',timestamp);
+		//console.log(info);
+		//console.log(prevInfo);
+		//info = info.concat(' ',timestamp);
 		//sessionStorage.setItem(toolno, info);	
-
-		toolsName= toolsName + toolno + info + ";\n";
-		console.log(toolsName);
+		if(toolsName == "Eraser/Color Eraser") toolsName = "Eraser";
+		else toolsName= toolsName + info + ";\n";
+		//console.log(toolsName);
 		/*
 		try{
 			let str = ['Ananta', 'Chakrabarty']
