@@ -715,17 +715,17 @@ function canvas_pointer_move(e){
 
 	//Ananta
 	
-	var timestamp = Math.floor(Date.now()/1000);
+	//var timestamp = Math.floor(Date.now()/1000);
 	info = selected_tool.name;
 	
 	if(info!=prevInfo){
 		toolno++;
 		console.log(info);
 		console.log(prevInfo);
-		info = info.concat(' ',timestamp);
+		//info = info.concat(' ',timestamp);
 		//sessionStorage.setItem(toolno, info);	
-
-		toolsName= toolsName + toolno + info + ";\n";
+		if(toolsName == "Eraser / Color Eraser") toolsName = toolsName + "Eraser" + ";\n";
+		else toolsName= toolsName + info + ";\n";
 		console.log(toolsName);
 		/*
 		try{

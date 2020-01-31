@@ -561,7 +561,7 @@ function file_step(){
 
 	let tools= returnTools();
 
-	let writeText = new Blob([tools, "\n\n", comment]);
+	let writeText = new Blob([tools, "\ndone;\n", comment]);
 
 	const file_saver = saveAs(writeText, `${file_name}.txt`);
 
