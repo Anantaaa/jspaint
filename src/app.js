@@ -1,16 +1,10 @@
 //Ananta
-let prevInfo = "Ananta"; 
+let prevInfo = ""; 
 let info = "";
 let toolsName = "";
 let toolno = 0;
 const default_magnification = 1;
 const default_tool = get_tool_by_name("Pencil");
-
-/*
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://Biswa:Ananta2525++@mango-nskfn.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-*/
 
 const default_canvas_width = 685;
 const default_canvas_height = 385;
@@ -625,7 +619,7 @@ function to_canvas_coords({clientX, clientY}) {
 
 function update_fill_and_stroke_colors_and_lineWidth(selected_tool) {
 	ctx.lineWidth = stroke_size;
-
+	
 	const reverse_because_fill_only = selected_tool.$options && selected_tool.$options.fill && !selected_tool.$options.stroke;
 	ctx.fillStyle = fill_color =
 	ctx.strokeStyle = stroke_color =
@@ -663,6 +657,18 @@ function tool_go(selected_tool, event_name){
 		selected_tool.paint(ctx, pointer.x, pointer.y);
 	}
 }
+
+function save_tool_info(selected_tool)
+{
+	info = selected_tool.name;
+	if(info!=prevInfo){
+		toolno++;
+		if(toolsName == "Eraser/Color Eraser") toolsName = toolsName + "Eraser" + ";\n";
+		else toolsName= toolsName + info + ";\n";
+	}
+	prevInfo=selected_tool.name;
+}
+
 function canvas_pointer_move(e){
 	ctrl = e.ctrlKey;
 	shift = e.shiftKey;
@@ -714,46 +720,20 @@ function canvas_pointer_move(e){
 	}
 
 	//Ananta
-	
-	var timestamp = Math.floor(Date.now()/1000);
-	info = selected_tool.name;
-	
-	if(info!=prevInfo){
-		toolno++;
-		//console.log(info);
-		//console.log(prevInfo);
-		//info = info.concat(' ',timestamp);
-		//sessionStorage.setItem(toolno, info);	
-		if(toolsName == "Eraser/Color Eraser") toolsName = "Eraser";
-		else toolsName= toolsName + info + ";\n";
-		//console.log(toolsName);
-		/*
-		try{
-			let str = ['Ananta', 'Chakrabarty']
-			blob = new Blob([str]);
-			const file_saver = saveAs(blob, `${'Ananta'}.txt`);
-			file_saver.onwriteend = () => {
-				// this won't fire in chrome
-				savedCallbackUnreliable();
-			};
-		} catch(ex){
-			console.log(ex);
-		}
-		*/
-
-	}
-
-	prevInfo=selected_tool.name;
+	//var timestamp = Math.floor(Date.now()/1000);
+	save_tool_info(selected_tool)
 
 	selected_tools.forEach((selected_tool)=> {
 		tool_go(selected_tool);
 	});
 	pointer_previous = pointer;
 }
+
 $canvas.on("pointermove", e => {
 	pointer = to_canvas_coords(e);
 	$status_position.text(`${pointer.x},${pointer.y}`);
 });
+
 $canvas.on("pointerenter", ()=> {
 	pointer_over_canvas = true;
 
@@ -764,6 +744,7 @@ $canvas.on("pointerenter", ()=> {
 		update_helper_layer_on_pointermove_active = true;
 	}
 });
+
 $canvas.on("pointerleave", ()=> {
 	pointer_over_canvas = false;
 
@@ -790,6 +771,7 @@ function average_points(points) {
 	average.y /= points.length;
 	return average;
 }
+
 $canvas_area.on("pointerdown", (event)=> {
 	pointers.push({pointerId: event.pointerId, x: event.clientX, y: event.clientY});
 
@@ -806,6 +788,7 @@ $canvas_area.on("pointerdown", (event)=> {
 		return;
 	}
 });
+
 $G.on("pointerup pointercancel", (event)=> {
 	pointers = pointers.filter((pointer)=> {
 		if (event.pointerId === pointer.pointerId) {
@@ -875,6 +858,7 @@ $canvas.on("pointerdown", e => {
 
 	const pointerdown_action = () => {
 		let interval_ids = [];
+		save_tool_info(selected_tool)
 		selected_tools.forEach((selected_tool)=> {
 			if(selected_tool.paint || selected_tool.pointerdown){
 				tool_go(selected_tool, "pointerdown");
