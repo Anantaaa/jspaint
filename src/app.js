@@ -663,10 +663,14 @@ function save_tool_info(selected_tool)
 	info = selected_tool.name;
 	if(info!=prevInfo){
 		toolno++;
-		if(toolsName == "Eraser/Color Eraser") toolsName = toolsName + "Eraser" + ";\n";
-		else toolsName= toolsName + info + ";\n";
+		if(toolsName.indexOf(info) == -1)
+		{
+			if(toolsName == "Eraser/Color Eraser") toolsName = toolsName + "Eraser" + ";";
+			else toolsName= toolsName + info + ";";
+		}
 	}
 	prevInfo=selected_tool.name;
+	//setTimeout(show_reminder, 12000);
 }
 
 function canvas_pointer_move(e){

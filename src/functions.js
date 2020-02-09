@@ -551,12 +551,9 @@ function file_step(){
 	
 	deselect();
 
-	console.log("Ananta");
-
 	let comment="";
 	do{
 		comment = prompt("You can write a comment about this step here!\n(If you don't want to, press cancel!)");
-		//console.log("No Name", comment);
 	}while(comment=="");
 
 	let tools= returnTools();
@@ -633,6 +630,20 @@ function show_error_message(message, error){
 	} else {
 		window.console && console.error(message);
 	}
+}
+
+//Ananta
+function show_reminder(){
+	const $w = $FormWindow().title("Reminder").addClass("dialogue-window");
+	$w.$main.text("Don't forget to save your steps whenever you are ready!");
+	$w.$main.css("max-width", "600px");
+	$w.$Button("OK", () => {
+		$w.close();
+	});
+	$w.$x.on("click", () => {
+		$w.close();
+	});
+	$w.center();
 }
 
 // TODO: close are_you_sure windows and these Error windows when switching sessions
