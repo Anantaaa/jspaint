@@ -922,7 +922,31 @@ window.tools = [{
 		}
 	},
 	$options: $ChooseShapeStyle()
-}];
+},
+/*//Ananta
+{
+	name: "save_step",
+	help_icon: "save_step.gif",
+	description: "Draws a straight line with the selected line width.",
+	//cursor: ["precise", [16, 16], "crosshair"],
+	file_step(){
+	
+		deselect();
+	
+		let comment="";
+		do{
+			comment = prompt("You can write a comment about this step here!\n(If you don't want to, press cancel!)");
+		}while(comment=="");
+	
+		let tools= returnTools();
+	
+		let writeText = new Blob([tools, "\ndone;\n", comment]);
+	
+		const file_saver = saveAs(writeText, `${file_name}.txt`);
+	
+		file_save();
+	}
+}*/];
 
 /* eslint-enable no-restricted-syntax */
 

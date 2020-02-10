@@ -1,4 +1,34 @@
-
+function $Step(){
+	const $b = $(E("div")).addClass("step");
+	const swatch_canvas = make_canvas();
+	$(swatch_canvas).css({pointerEvents: "none"}).appendTo($b);
+	
+	$b.update = _color => {
+		color = _color;
+		if(color instanceof CanvasPattern){
+			$b.addClass("pattern");
+		}else{
+			$b.removeClass("pattern");
+		}
+		
+		requestAnimationFrame(() => {
+			swatch_canvas.width = $b.innerWidth();
+			swatch_canvas.height = $b.innerHeight();
+			// I don't think disable_image_smoothing() is needed here
+			
+			if(color){
+				swatch_canvas.ctx.fillStyle = color;
+				swatch_canvas.ctx.fillRect(0, 0, swatch_canvas.width, swatch_canvas.height);
+			}
+		});
+	};
+	$G.on("theme-load", () => {
+		$b.update();
+	});
+	$b.update();
+	
+	return $b;
+}
 
 function $Swatch(color){
 	const $b = $(E("div")).addClass("swatch");
