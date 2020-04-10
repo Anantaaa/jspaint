@@ -35,6 +35,11 @@ context('visual tests', () => {
 		cy.get('.tool[title="Rectangle"]').click();
 		cy.get('.Tools-component').matchImageSnapshot();
 	});
+	/*//Ananta
+	it('save_step selected', () => {
+		cy.get('.tool[title="save_ste"]').click();
+		cy.get('.Tools-component').matchImageSnapshot();
+	});*/
 
 	beforeEach(()=> {
 		if (Cypress.$('.window:visible')[0]) {

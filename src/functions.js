@@ -564,6 +564,18 @@ function file_step(){
 
 	file_save();
 }
+function show_reminder(){
+	const $w = $FormWindow().title("Reminder").addClass("dialogue-window");
+	$w.$main.text("Don't forget to save your steps whenever you are ready!");
+	$w.$main.css("max-width", "600px");
+	$w.$Button("OK", () => {
+		$w.close();
+	});
+	$w.$x.on("click", () => {
+		$w.close();
+	});
+	$w.center();
+}
 
 function file_save_as(){
 	deselect();
@@ -630,20 +642,6 @@ function show_error_message(message, error){
 	} else {
 		window.console && console.error(message);
 	}
-}
-
-//Ananta
-function show_reminder(){
-	const $w = $FormWindow().title("Reminder").addClass("dialogue-window");
-	$w.$main.text("Don't forget to save your steps whenever you are ready!");
-	$w.$main.css("max-width", "600px");
-	$w.$Button("OK", () => {
-		$w.close();
-	});
-	$w.$x.on("click", () => {
-		$w.close();
-	});
-	$w.center();
 }
 
 // TODO: close are_you_sure windows and these Error windows when switching sessions

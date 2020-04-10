@@ -1,4 +1,5 @@
-function $Step(){
+//Ananta
+/*function $Step(){
 	const $b = $(E("div")).addClass("step");
 	const swatch_canvas = make_canvas();
 	$(swatch_canvas).css({pointerEvents: "none"}).appendTo($b);
@@ -10,7 +11,6 @@ function $Step(){
 		}else{
 			$b.removeClass("pattern");
 		}
-		
 		requestAnimationFrame(() => {
 			swatch_canvas.width = $b.innerWidth();
 			swatch_canvas.height = $b.innerHeight();
@@ -28,7 +28,7 @@ function $Step(){
 	$b.update();
 	
 	return $b;
-}
+}*/
 
 function $Swatch(color){
 	const $b = $(E("div")).addClass("swatch");

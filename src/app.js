@@ -182,6 +182,7 @@ const $toolbox = $ToolBox(tools);
 // If there's to be extra tools, they should probably get a window, with different UI
 // so it can display names of the tools, and maybe authors and previews (and not necessarily icons)
 const $colorbox = $ColorBox();
+//const $c = $Step();
 
 $canvas_area.on("user-resized", (_event, _x, _y, unclamped_width, unclamped_height) => {
 	resize_canvas_and_save_dimensions(unclamped_width, unclamped_height);
@@ -667,10 +668,12 @@ function save_tool_info(selected_tool)
 		{
 			if(toolsName == "Eraser/Color Eraser") toolsName = toolsName + "Eraser" + ";";
 			else toolsName= toolsName + info + ";";
+			//setTimeout(show_reminder, 12000);
+			//show_reminder();
 		}
 	}
 	prevInfo=selected_tool.name;
-	//setTimeout(show_reminder, 12000);
+	//setTimeout(show_reminder, 6000);
 }
 
 function canvas_pointer_move(e){
